@@ -1,0 +1,172 @@
+﻿@model HMS.Models.Patient
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("_NavBar");
+}
+
+
+@{
+    Html.RenderPartial("_SideBar");
+}
+
+<div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-7 col-6">
+                        <h4 class="page-title">Patient Profile</h4>
+                    </div>
+
+                   
+                </div>
+                <div class="card-box profile-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-view">
+                                <div class="profile-img-wrap">
+                                    <div class="profile-img">
+                                        @if (Model.Files.Any(f => f.FileType == FileType.Avatar))
+                                        {
+                                            <a href="#"><img class="avatar" src="~/File?id=@Model.Files.First(f => f.FileType == FileType.Avatar).FileId
+                                                             " alt="avatar"></a>
+                                        }
+                                        </div>
+                                        
+                                </div>
+                                <div class="profile-basic">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="profile-info-left">
+                                                <h3 class="user-name m-t-0 mb-0"> @Html.DisplayFor(model => model.FirstName) &nbsp;@Html.DisplayFor(model => model.LastName)</h3>
+                                                <span class="title">Patient ID:</span>
+                                                <span class="text">@Html.DisplayFor(model => model.ID)</span>
+                                               
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <ul class="personal-info">
+                                                <li>
+                                                    @*<span class="title">Phone:</span>
+                                                    <span class="text"><a href="#"></a></span>*@
+                                                </li>
+                                          
+                                                <li>
+                                                  <span class="title">Date of Birth:</span>
+                                                  <span class="text">@Html.DisplayFor(model => model.DOB)</span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Parish:</span>
+                                                    <span class="text">@Html.DisplayFor(model => model.Parish)</span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Address:</span>
+                                                    <span class="text">@Html.DisplayFor(model => model.Address)</span>
+                                                </li>
+
+                                                <li>
+                                                    <span class="title">Gender:</span>
+                                                    <span class="text">@Html.DisplayFor(model => model.Gender)</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+				<div class="profile-tabs">
+					@*<ul class="nav nav-tabs nav-tabs-bottom">
+						<li class="nav-item"><a class="nav-link active" href="#about-cont" data-toggle="tab">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="#bottom-tab2" data-toggle="tab">Profile</a></li>
+						<li class="nav-item"><a class="nav-link" href="#bottom-tab3" data-toggle="tab">Messages</a></li>
+					</ul>*@
+
+					<div class="tab-content">
+						<div class="tab-pane show active" id="about-cont">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box">
+                            <h3 class="card-title">Patient Vitals</h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name"></a>
+                                                <div></div>
+                                                <span class="time"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name"></a>
+                                                <div></div>
+                                                <span class="time"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-box mb-0">
+                            <h3 class="card-title">Diagnosis</h3>
+                            @foreach (var item in Model.Diagnoses)
+                            { 
+                                <div class="experience-box">
+
+                                    <ul class="experience-list">
+                                        <li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+
+                                            <div class="experience-content">
+                                                <div class="timeline-content">
+                                                    <a href="#/" class="name"> @Html.DisplayNameFor(modelItem => item.ClinicalRemarks)</a>
+                                                    <span class="time"> @Html.DisplayFor(modelItem => item.ClinicalRemarks)</span>
+                                                </div>
+                                                <div class="timeline-content">
+                                                    <a href="#/" class="name"> @Html.DisplayNameFor(modelItem => item.InitialDiagnosis)</a>
+                                                    <span class="time"> @Html.DisplayFor(modelItem => item.InitialDiagnosis)</span>
+                                                </div>
+                                                <div class="timeline-content">
+                                                    <a href="#/" class="name"> @Html.DisplayNameFor(modelItem => item.SecondDiagnosis)</a>
+                                                    <span class="time"> @Html.DisplayFor(modelItem => item.SecondDiagnosis)</span>
+                                                    <div class="timeline-content">
+                                                        <a href="#/" class="name"> @Html.DisplayNameFor(modelItem => item.ThirdDiagnosis)</a>
+                                                        <span class="time"> @Html.DisplayFor(modelItem => item.ThirdDiagnosis)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    
+                                </div>
+                                }
+                        </div>
+                    </div>
+                </div>
+						</div>
+						</div>
+                </div>
+            </div>
+        </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

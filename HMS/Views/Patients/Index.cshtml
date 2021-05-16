@@ -1,0 +1,114 @@
+﻿@model IEnumerable<HMS.Models.Patient>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("_NavBar");
+}
+
+
+@{
+    Html.RenderPartial("_SideBar");
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Patients</h4>
+            </div>
+
+            @if (User.IsInRole("Doctor") || User.IsInRole("SuperUser") || User.IsInRole("Receptionist"))
+            {
+                <div class="col-sm-8 col-9 text-right m-b-20">
+                    <a href="@Url.Action("Create", "Patients")" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Patient</a>
+                </div>
+            }
+            </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-border table-striped custom-table datatable mb-0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Gender)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Town)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Parish)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DOB)
+                                </th>
+                                @if (User.IsInRole("Doctor") || User.IsInRole("SuperUser")) { 
+                                    <th class="text-right">Action</th>
+                                    }
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    @if (item.Files.Any(f => f.FileType == FileType.Avatar))
+                                    {
+                                        <td><img width="28" height="28" src="~/File?id=@item.Files.First(f => f.FileType == FileType.Avatar).FileId" class="rounded-circle m-r-5" alt="">@Html.DisplayFor(modelItem => item.FirstName)</td>
+                                    }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gender)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Address)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Town)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Parish)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DOB)
+                                    </td>
+                                    @if (User.IsInRole("Doctor") || User.IsInRole("SuperUser"))
+                                    {
+                                        <td class="text-right">
+                                            <div class="dropdown dropdown-action">
+                                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="@Url.Action("Edit", "Patients", new { id = item.ID })"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="@Url.Action("Create", "Diagnoses", new { id = item.ID })"><i class="fa fa-info-circle m-r-5"></i> Diagnoses</a>
+                                                    <a class="dropdown-item" href="@Url.Action("Details", "Patients", new { id = item.ID })"><i class="fa fa-info-circle m-r-5"></i> Details</a>
+
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    </tr>
+                            </tbody>
+                        }
+                        </table>
+                </div>
+            </div>
+        </div>
+
+                </div>
+            </div>

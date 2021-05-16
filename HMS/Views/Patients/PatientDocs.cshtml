@@ -1,0 +1,71 @@
+﻿@model HMS.Models.Patient
+
+@{
+    ViewBag.Title = "PatientDocs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("_NavBar");
+}
+
+
+@{
+    Html.RenderPartial("_SideBar");
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="main-wrapper">
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <h4 class="page-title">Upload Patient Documents</h4>
+
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+
+                                    <div class="profile-upload">
+                                        <div class="upload-img">
+                                            <img alt="" src="~/Content/assets/img/user.jpg">
+                                        </div>
+                                        <div class="upload-input">
+                                            <input type="file" name="upload" id="Docs" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 text-center m-t-20">
+                            <input type="submit" value="Create" class="btn btn-primary submit-btn">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            if (window.FileReader != null) {
+                $('#single').hide();
+                $('.single').prop('disabled', true);
+            } else {
+                $('#multiple').hide();
+                $('.multiple').prop('disabled', true);
+            }
+        });
+    </script>
+}

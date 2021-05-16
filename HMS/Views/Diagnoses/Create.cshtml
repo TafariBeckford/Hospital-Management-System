@@ -1,0 +1,83 @@
+﻿@model HMS.Models.Diagnosis
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("_NavBar");
+}
+
+
+@{
+    Html.RenderPartial("_SideBar");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="PatientID" value="@ViewBag.PatientID"/>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h4 class="page-title">Patient Diagnosis</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                   
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(model => model.ClinicalRemarks)
+                        </div>
+                        @Html.TextAreaFor(model => model.ClinicalRemarks, 4, 84, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ClinicalRemarks, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(model => model.InitialDiagnosis)
+                        </div>
+                        @Html.TextAreaFor(model => model.InitialDiagnosis, 4, 84, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InitialDiagnosis, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(model => model.SecondDiagnosis)
+                        </div>
+                        @Html.TextAreaFor(model => model.SecondDiagnosis, 4, 84, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SecondDiagnosis, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(model => model.ThirdDiagnosis)
+                        </div>
+                        @Html.TextAreaFor(model => model.ThirdDiagnosis, 4, 84, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ThirdDiagnosis, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-sm-6">
+
+
+
+                        <div class="form-group">
+                            <div class="m-t-20 text-center">
+                                <input type="submit" value="Create" class="btn btn-primary submit-btn" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

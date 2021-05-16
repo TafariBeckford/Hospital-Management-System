@@ -1,0 +1,50 @@
+﻿@model IEnumerable<HMS.Models.StaffView>
+@{
+    ViewBag.Title = "Staff";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("_NavBar");
+}
+
+
+@{
+    Html.RenderPartial("_SideBar");
+}
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Medical Staff</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="@Url.Action("Staff", "Account")" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Doctor</a>
+            </div>
+        </div>
+
+        <div class="row doctor-grid">
+            @foreach (var s in Model)
+            {
+                <div class="col-md-4 col-sm-4  col-lg-3">
+                    <div class="profile-widget">
+                        <div class="doctor-img">
+                            <a class="avatar" href=""><img alt="" src="@Html.DisplayFor(modelItem => s.image).ToString()"></a>
+                        </div>
+
+                        <h4 class="doctor-name text-ellipsis"><a href=""> @Html.DisplayFor(modelItem => s.fname) &nbsp; @Html.DisplayFor(modelItem => s.lname)</a></h4>
+          
+                        <div class="user-country">
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+}

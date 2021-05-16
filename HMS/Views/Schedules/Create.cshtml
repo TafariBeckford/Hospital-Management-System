@@ -1,0 +1,130 @@
+﻿@using HMS.Services
+
+@model HMS.Models.Schedule
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("_NavBar");
+}
+
+
+@{
+    Html.RenderPartial("_SideBar");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h4 class="page-title">Add Schedule</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DoctorName)
+
+                                @Html.DropDownListFor(model => model.DoctorName, DoctorServices.GetDoctors().Select(x => new SelectListItem { Text = x.FirstName + " " + x.LastName, Value = "Dr." + " " + x.FirstName + " " + x.LastName }), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DoctorName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Department)
+
+                                @Html.DropDownListFor(model => model.Department, DoctorServices.GetDepartment().Select(x => new SelectListItem { Text = x.DepartmentName, Value = x.DepartmentName }), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AvailableDays)
+
+                                @Html.DropDownListFor(m => m.AvailableDays, new SelectList(Enum.GetValues(typeof(Day))), "Select Days", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.AvailableDays, "", new { @class = "text-danger" })
+                              
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartTime)
+                                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control", id = "datetimepicker3" } })
+                                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndTime)
+                                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", id = "datetimepicker3" } })
+                                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Message)
+                                @Html.TextAreaFor(model => model.Message, 4, 84, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Status)
+                                <div class="col-sm-6">
+                                    @Html.CheckBoxFor(model => model.Status)
+                                    Active
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="form-group">
+                        <div class="m-t-20 text-center">
+                            <input type="submit" value="Create" class="btn btn-primary submit-btn" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section scripts {
+        <script>
+            $(function () {
+                $('#datetimepicker3').datetimepicker({
+                    format: 'LT'
+                });
+                $('#datetimepicker4').datetimepicker({
+                    format: 'LT'
+                });
+            });
+        </script>
+    }
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

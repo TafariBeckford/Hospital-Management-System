@@ -1,0 +1,59 @@
+﻿@model HMS.Models.Diagnosis
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Diagnosis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClinicalRemarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClinicalRemarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InitialDiagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitialDiagnosis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondDiagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondDiagnosis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThirdDiagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdDiagnosis)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
